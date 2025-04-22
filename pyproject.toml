@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "mcp-sandbox"
+version = "0.1.0"
+description = ""
+authors = [
+    "Ryan Bostian <rab0309@gmail.com>"
+]
+readme = "README.md"
+packages = [{include = "audio-2-transcript-sandbox"}]
+
+[tool.poetry.dependencies]
+python = "^3.12.8"
+ollama = "^0.4.8"
+mcp = {extras = ["cli"], version = "^1.6.0"}
+asyncio = "^3.4.3"
+requests = "^2.32.3"
+aiohttp = "^3.11.18"
+fastapi = "^0.115.12"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

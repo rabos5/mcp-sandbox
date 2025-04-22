@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant User
+    participant Client as MCP Client (Python)
+    participant Ollama as Ollama API
+    participant Server as MCP Server
+    
+    User->>Client: Start client.py
+    Client->>Server: Initialize connection
+    Server->>Client: Return available tools
+    Client->>User: Display available tools
+    
+    User->>Client: Enter math problem (e.g., "What is 3+2?")
+    Client->>Ollama: Call API with prompt and available tools
+    Ollama->>Client: Return response with tool call
+    
+    Note over Client: Extract tool call parameters
+    Note over Client: Convert from x,y to a,b if needed
+    
+    Client->>Server: Call add_numbers tool
+    Server->>Server: Execute calculation
+    Server->>Client: Return calculation result
+    Client->>User: Display result ("The sum of 3 and 2 is 5")
