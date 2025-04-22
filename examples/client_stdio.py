@@ -30,14 +30,18 @@ async def main():
             
             # 5. call ollama api
             print("calling ollama api...")
-            ollama_response = await call_ollama_api(user_prompt, ollama_tools)
-            ollama_response = ollama_response.get("response", "no response")
+            ollama_response = call_ollama_api(user_prompt, ollama_tools)
             
             print("ollama api response ->")
-            print(ollama_response)
+            print(ollama_response.message)
+            
+            if ollama_response.message.tool_calls:
+                print("\ntool calls in response ->")
+                for tc in ollama_response.message.tool_calls:
+                    print(f"- {tc}")
             
             # 6. parse tool calls from ollama api response
-            tool_calls = await extract_tool_calls(ollama_response)
+            tool_calls = extract_tool_calls_from_ollama(ollama_response)
             
             if tool_calls:
                 print(f"\ndetected {len(tool_calls)} tool call(s)")
